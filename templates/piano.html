@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lamg='ja'>
+  <head>
+    <meta charset='UTF-8'>
+    <title>ブラウザで弾ける！淫夢ピアノ - [pan*2-piano]</title>
+    <link rel="icon" href="./static/img/ico.png">
+    <style>
+        body {
+          text-align: center;
+          overflow-x: hidden;
+        }
+        .border1 {
+          color:transparent;
+          border-bottom:2.4px solid black;
+          width:100%;
+        }
+        .piano{
+          display: inline-block;
+          transform: scale(1.9194545);
+          transform-origin:center top;
+          margin-bottom: 500px;
+        }
+        .key {
+          width: 60px;
+          height: 200px;
+          background-color: white;
+          border: 1px solid #ccc;
+          cursor: pointer;
+          transition: background-color 0.1s;
+          display: inline-block;
+          text-align: center;
+          vertical-align: top;
+          padding-top:10em;
+         }
+        .key:active, 
+        .key.active {
+          background-color: #e0e0e0;
+          transform: translateY(2px);
+          box-shadow: inset 0 3px 5px rgba(0,0,0,0.2);
+        }
+        .key.black {
+          background-color: #333;
+          color: white;
+          height: 120px;
+          width: 40px;
+          margin-left: -20px;
+          margin-right: -20px;
+          position: relative;
+          z-index: 2;
+          padding-top:4em;
+        }
+        .key.black:active,
+        .key.black.active {
+          background-color: #555;
+        }
+        #display-image {
+          max-width: 100%;
+          height: auto;
+          width:11.4514%;
+          text-align:right;
+          margin-right:1px;
+        }
+    </style>
+  </head>
+  <body>
+    <h1>淫夢ピアノ</h1>
+    <div class=border1></div>
+<br><br>
+<p>
+くぅ～疲れましたw これにて完成です！<br>
+実は、ネタレスしたら作成の話を持ちかけられたのが始まりでした<br>
+本当は相応の技術なかったのですが←<br>
+ご厚意を無駄にするわけには行かないので流行りのAIで挑んでみた所存ですw<br>
+以下、操作のホウホをどぞ
+<br><br>
+ーーー  スマホ  ーーー<br>
+<br>
+キーを押すと先輩がイキスギますかき。<br>
+<br>
+ーーーー  PC  ーーーー<br>
+<br>
+＜キー対応＞<br><br>
+ 　 W E   T Y U   |    ﾄﾞ# ﾚ# ﾌｧ# ｿ# ﾗ# <br>
+ 　A S D F G H J  |   ド レ ミﾌｧ ソ ラ シ <br>
+<br>
+マウスでクリックしても普通に出ます。
+<br>
+<br>
+では、<br><br>
+
+まどか、さやか、マミ、京子、ほむら、俺「皆さんありがとうございました！」
+<br><br>
+終
+<br><br>
+まどか、さやか、マミ、京子、ほむら「って、なんで俺くんが！？<br>
+改めまして、ありがとうございました！」<br>
+<br>
+本当の本当に終わり<br>
+</p>
+    <div class="piano">
+      <br><br>
+      <button class="key" id="C" data-key="A">ド</button>
+      <button class="key black" id="C2" data-key="W">ド#</button>
+      <button class="key" id="D" data-key="S">レ</button>
+      <button class="key black" id="D2" data-key="E">レ#</button>
+      <button class="key" id="E" data-key="D">ミ</button>
+      <button class="key" id="F" data-key="F">ファ</button>
+      <button class="key black" id="F2" data-key="T">ファ#</button>
+      <button class="key" id="G" data-key="G">ソ</button>
+      <button class="key black" id="G2" data-key="Y">ソ#</button>
+      <button class="key" id="A" data-key="H">ラ</button>
+      <button class="key black" id="A2" data-key="U">ラ#</button>
+      <button class="key" id="B" data-key="J">シ</button>
+    </div>
+    <p><a href="https://www.google.com/cd ">google様広告審査通して♡</a></p>
+<script>
+const keys = document.getElementsByClassName("key");
+
+for (const key of keys) {
+    key.addEventListener('mousedown', (e) => {
+        const file = e.target.id;
+        const sound = new Audio(`/static/sound/${file}.mp3`);
+        sound.currentTime = 0;
+        sound.play().catch(err => console.error(err));
+    });
+}
+    window.addEventListener("keydown",(event) => {
+    const pressedKey=event.key.toUpperCase();
+    const targetButton = document.querySelector(`button[data-key="${pressedKey}"]`);
+        if (targetButton){
+        targetButton.classList.add('active');
+        const file = targetButton.id;
+        const sound = new Audio(`/static/sound/${file}.mp3`);
+        sound.currentTime = 0;
+        sound.play().catch(err => console.error(err));  
+    }
+});
+window.addEventListener("keyup", (event) => {
+    const pressedKey = event.key.toUpperCase();
+    const targetButton = document.querySelector(`button[data-key="${pressedKey}"]`);
+    
+    if (targetButton) {
+        targetButton.classList.remove('active');
+    }
+});
+</script>
+  </body>
+</html>
