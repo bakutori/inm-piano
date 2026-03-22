@@ -88,11 +88,11 @@
 <br>
 では、<br><br>
 
-まどか、さやか、マミ、京子、ほむら、俺「皆さんありがとうございました！」
+著作権侵害、肖像権侵害、名誉棄損、俺「皆さんありがとうございました！」
 <br><br>
 終
 <br><br>
-まどか、さやか、マミ、京子、ほむら「って、なんで俺くんが！？<br>
+著作権侵害、肖像権侵害、名誉棄損「って、なんで俺くんが！？<br>
 改めまして、ありがとうございました！」<br>
 <br>
 本当の本当に終わり<br>
@@ -112,37 +112,46 @@
       <button class="key black" id="A2" data-key="U">ラ#</button>
       <button class="key" id="B" data-key="J">シ</button>
     </div>
-    <p><a href="https://www.google.com/cd ">google様広告審査通して♡</a></p>
 <script>
-const keys = document.getElementsByClassName("key");
+  const keys = document.querySelectorAll(".key");
+  const audioCache = {};
 
-for (const key of keys) {
-    key.addEventListener('mousedown', (e) => {
-        const file = e.target.id;
-        const sound = new Audio(`static/sound/${file}.mp3`);
-        sound.currentTime = 0;
-        sound.play().catch(err => console.error(err));
-    });
-}
-    window.addEventListener("keydown",(event) => {
-    const pressedKey=event.key.toUpperCase();
-    const targetButton = document.querySelector(`button[data-key="${pressedKey}"]`);
-        if (targetButton){
-        targetButton.classList.add('active');
-        const file = targetButton.id;
-        const sound = new Audio(`static/sound/${file}.mp3`);
-        sound.currentTime = 0;
-        sound.play().catch(err => console.error(err));  
+  keys.forEach(key => {
+    const id = key.id;
+    const audio = new Audio(`static/sound/${id}.mp3`);
+    audio.preload = "auto";
+    audioCache[id] = audio;
+  });
+  function playNote(id) {
+    const sound = audioCache[id];
+    if (sound) {
+      sound.currentTime = 0; 
+      sound.play().catch(err => console.error("再生エラー:", err));
     }
-});
-window.addEventListener("keyup", (event) => {
+  }
+  keys.forEach(key => {
+    key.addEventListener('mousedown', (e) => {
+      playNote(e.currentTarget.id);
+    });
+  });
+  window.addEventListener("keydown", (event) => {
+    if (event.repeat) return;
+
     const pressedKey = event.key.toUpperCase();
     const targetButton = document.querySelector(`button[data-key="${pressedKey}"]`);
     
     if (targetButton) {
-        targetButton.classList.remove('active');
+      targetButton.classList.add('active');
+      playNote(targetButton.id);
     }
-});
+  });
+  window.addEventListener("keyup", (event) => {
+    const pressedKey = event.key.toUpperCase();
+    const targetButton = document.querySelector(`button[data-key="${pressedKey}"]`);
+    if (targetButton) {
+      targetButton.classList.remove('active');
+    }
+  });
 </script>
   </body>
 </html>
