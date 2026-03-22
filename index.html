@@ -119,7 +119,7 @@ const keys = document.getElementsByClassName("key");
 for (const key of keys) {
     key.addEventListener('mousedown', (e) => {
         const file = e.target.id;
-        const sound = new Audio(`/static/sound/${file}.mp3`);
+        const sound = new Audio(`static/sound/${file}.mp3`);
         sound.currentTime = 0;
         sound.play().catch(err => console.error(err));
     });
@@ -130,7 +130,7 @@ for (const key of keys) {
         if (targetButton){
         targetButton.classList.add('active');
         const file = targetButton.id;
-        const sound = new Audio(`/static/sound/${file}.mp3`);
+        const sound = new Audio(`static/sound/${file}.mp3`);
         sound.currentTime = 0;
         sound.play().catch(err => console.error(err));  
     }
